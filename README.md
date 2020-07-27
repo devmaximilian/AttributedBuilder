@@ -2,7 +2,7 @@
 
 A builder-style wrapper for NSAttributedString. 
 
-![Swift 5.0](https://img.shields.io/badge/Swift-5.2-orange)
+![Swift 5.0](https://img.shields.io/badge/Swift-5.0-orange)
 ![Swift Package Manager](https://img.shields.io/badge/SwiftPM-compatible-brightgreen)
 ![Platforms](https://img.shields.io/badge/Platforms-iOS%20+%20macOS-blue)
 ![GitHub issues](https://img.shields.io/github/issues-raw/devmaximilian/attributed-builder)
