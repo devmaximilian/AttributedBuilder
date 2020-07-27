@@ -9,7 +9,7 @@ A builder-style wrapper for NSAttributedString.
 
 ### Requirements
 
-- iOS 8 (or macOS 10.10)
+- iOS 9 (or macOS 10.10)
 - Swift 5.0
 
 ### Example usage
