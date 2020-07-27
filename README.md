@@ -20,7 +20,7 @@ The following example demonstrates creating an attributed string.
 // Optional: Create an alias for NSAttributedString
 typealias AttributedString = NSAttributedString
 
-let value = AttributedString("Hello, world!")
+let value = AttributedString(string: "Hello, world!")
     .font(.largeTitle)
     .foregroundColor(.darkGray)
     .backgroundColor(.yellow)
