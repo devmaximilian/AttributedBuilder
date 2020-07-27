@@ -14,7 +14,7 @@ import Cocoa
 
 #if os(iOS) || os(macOS)
 extension NSParagraphStyle {
-    fileprivate func update(_ closure: (NSMutableParagraphStyle) -> Void) -> NSParagraphStyle {
+    internal func update(_ closure: (NSMutableParagraphStyle) -> Void) -> NSParagraphStyle {
         let mutableParagraphStyle = NSMutableParagraphStyle()
         mutableParagraphStyle.setParagraphStyle(self)
         closure(mutableParagraphStyle)

@@ -198,10 +198,13 @@ extension NSAttributedString {
         }
     }
 }
+#endif
+
+#if os(iOS) || os(macOS)
 extension NSMutableAttributedString {
     fileprivate subscript(key: Key) -> Any? {
         get {
-            return self.attribute(key, at: 0, effectiveRange: NSRangePointer(bitPattern: self.length))
+            return self.attribute(key, at: 0, effectiveRange: nil)
         }
         set {
             if let value = newValue {
@@ -209,6 +212,149 @@ extension NSMutableAttributedString {
                 self.addAttribute(key, value: value, range: self.range)
             } else {
                 self.removeAttribute(key, range: self.range)
+            }
+        }
+    }
+}
+#endif
+
+// MARK: NSParagraphStyle
+
+#if os(iOS) || os(macOS)
+extension NSAttributedString {
+    fileprivate var paragraphStyle: NSParagraphStyle {
+        let paragraphStyle = self.attribute(.paragraphStyle, at: 0, effectiveRange: nil) as? NSParagraphStyle
+        return paragraphStyle ?? .default
+    }
+    
+    public func lineSpacing(_ value: CGFloat) -> NSAttributedString {
+        return self.update {
+            $0[.paragraphStyle] = self.paragraphStyle.update {
+                $0.lineSpacing = value
+            }
+        }
+    }
+
+    public func paragraphSpacing(_ value: CGFloat) -> NSAttributedString {
+        return self.update {
+            $0[.paragraphStyle] = self.paragraphStyle.update {
+                $0.paragraphSpacing = value
+            }
+        }
+    }
+
+    public func alignment(_ value: NSTextAlignment) -> NSAttributedString {
+        return self.update {
+            $0[.paragraphStyle] = self.paragraphStyle.update {
+                $0.alignment = value
+            }
+        }
+    }
+
+    public func firstLineHeadIndent(_ value: CGFloat) -> NSAttributedString {
+        return self.update {
+            $0[.paragraphStyle] = self.paragraphStyle.update {
+                $0.firstLineHeadIndent = value
+            }
+        }
+    }
+
+    public func headIndent(_ value: CGFloat) -> NSAttributedString {
+        return self.update {
+            $0[.paragraphStyle] = self.paragraphStyle.update {
+                $0.headIndent = value
+            }
+        }
+    }
+
+    public func tailIndent(_ value: CGFloat) -> NSAttributedString {
+        return self.update {
+            $0[.paragraphStyle] = self.paragraphStyle.update {
+                $0.tailIndent = value
+            }
+        }
+    }
+
+    public func lineBreakMode(_ value: NSLineBreakMode) -> NSAttributedString {
+        return self.update {
+            $0[.paragraphStyle] = self.paragraphStyle.update {
+                $0.lineBreakMode = value
+            }
+        }
+    }
+
+    public func minimumLineHeight(_ value: CGFloat) -> NSAttributedString {
+        return self.update {
+            $0[.paragraphStyle] = self.paragraphStyle.update {
+                $0.minimumLineHeight = value
+            }
+        }
+    }
+
+    public func maximumLineHeight(_ value: CGFloat) -> NSAttributedString {
+        return self.update {
+            $0[.paragraphStyle] = self.paragraphStyle.update {
+                $0.maximumLineHeight = value
+            }
+        }
+    }
+
+    public func baseWritingDirection(_ value: NSWritingDirection) -> NSAttributedString {
+        return self.update {
+            $0[.paragraphStyle] = self.paragraphStyle.update {
+                $0.baseWritingDirection = value
+            }
+        }
+    }
+
+    public func lineHeightMultiple(_ value: CGFloat) -> NSAttributedString {
+        return self.update {
+            $0[.paragraphStyle] = self.paragraphStyle.update {
+                $0.lineHeightMultiple = value
+            }
+        }
+    }
+
+    public func paragraphSpacingBefore(_ value: CGFloat) -> NSAttributedString {
+        return self.update {
+            $0[.paragraphStyle] = self.paragraphStyle.update {
+                $0.paragraphSpacingBefore = value
+            }
+        }
+    }
+
+    public func hyphenationFactor(_ value: Float) -> NSAttributedString {
+        return self.update {
+            $0[.paragraphStyle] = self.paragraphStyle.update {
+                $0.hyphenationFactor = value
+            }
+        }
+    }
+
+    @available(iOS 7.0, *)
+    public func tabStops(_ value: [NSTextTab]!) -> NSAttributedString {
+        return self.update {
+            $0[.paragraphStyle] = self.paragraphStyle.update {
+                $0.tabStops = value
+            }
+        }
+    }
+
+    @available(iOS 7.0, *)
+    public func defaultTabInterval(_ value: CGFloat) -> NSAttributedString {
+        return self.update {
+            $0[.paragraphStyle] = self.paragraphStyle.update {
+                $0.defaultTabInterval = value
+            }
+        }
+    }
+
+    @available(OSX 10.11, *)
+    @available(iOS 9.0, *)
+    public func allowsDefaultTighteningForTruncation(_ value: Bool) -> NSAttributedString {
+        return self.update {
+            $0[.paragraphStyle] = self.paragraphStyle.update {
+                $0.allowsDefaultTighteningForTruncation = value
             }
         }
     }
