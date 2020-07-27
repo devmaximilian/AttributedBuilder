@@ -35,7 +35,11 @@ extension NSAttributedString {
         closure(mutableAttributedString)
         return NSAttributedString(attributedString: mutableAttributedString)
     }
-    
+}
+#endif
+
+#if os(iOS) || os(macOS)
+extension NSAttributedString {    
     @available(iOS 6.0, *)
     public func font(_ value: Font) -> NSAttributedString {
         return self.update {
